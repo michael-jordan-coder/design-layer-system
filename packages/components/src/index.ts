@@ -21,6 +21,8 @@ export { Badge } from './surface/Badge/Badge';
 export type { BadgeProps } from './surface/Badge/Badge';
 export { Tooltip } from './surface/Tooltip/Tooltip';
 export type { TooltipProps } from './surface/Tooltip/Tooltip';
+export { Input } from './surface/Input/Input';
+export type { InputProps } from './surface/Input/Input';
 
 // accent
 export { Button } from './accent/Button/Button';

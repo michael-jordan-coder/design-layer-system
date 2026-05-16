@@ -17,6 +17,10 @@
   gap: var(--spacing-2);
 }
 
+.searchWrapper {
+  width: 280px;
+}
+
 .settingsList {
   display: flex;
   flex-direction: column;

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Sidebar, Topbar, PageLayout, CommandMenu, Icon, Card, Stat, Table, Dropdown, Badge, Tooltip, Button, Switch, Checkbox, RadioGroup, Tabs } from '@layers/components';
+import { Sidebar, Topbar, PageLayout, CommandMenu, Icon, Card, Stat, Table, Dropdown, Badge, Tooltip, Button, Switch, Checkbox, RadioGroup, Tabs, Input } from '@layers/components';
 import type { CommandGroup, Column } from '@layers/components';
 import { LayoutDashboard, BarChart2, Users, DollarSign, ShoppingBag, Settings, Sun, Moon, Search, MoreHorizontal, Plus } from 'lucide-react';
 import styles from './App.module.css';
@@ -44,6 +44,12 @@ export default function App() {
   const [active, setActive]           = useState('overview');
   const [theme, setTheme]             = useState<'dark' | 'light'>('dark');
   const [commandOpen, setCommandOpen] = useState(false);
+  const [userQuery, setUserQuery]     = useState('');
+
+  const filteredUsers = USERS.filter(u =>
+    u.name.toLowerCase().includes(userQuery.toLowerCase()) ||
+    u.email.toLowerCase().includes(userQuery.toLowerCase())
+  );
 
   function toggleTheme() {
     const next = theme === 'dark' ? 'light' : 'dark';
@@ -182,7 +188,14 @@ export default function App() {
         ) : active === 'users' ? (
           <div className={styles.page}>
             <div className={styles.pageHeader}>
-              <Button variant="ghost" size="sm">Filter</Button>
+              <div className={styles.searchWrapper}>
+                <Input
+                  icon={Search}
+                  placeholder="Search users..."
+                  value={userQuery}
+                  onChange={e => setUserQuery(e.target.value)}
+                />
+              </div>
               <div className={styles.pageHeaderActions}>
                 <Button variant="secondary" size="sm">Export</Button>
                 <Button variant="primary" size="sm" icon={Plus}>Invite user</Button>
@@ -190,7 +203,7 @@ export default function App() {
             </div>
             <Table
               columns={USER_COLUMNS}
-              data={USERS}
+              data={filteredUsers}
               rowKey={r => r.id}
               pageSize={5}
             />
