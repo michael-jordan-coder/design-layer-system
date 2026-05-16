@@ -9,6 +9,8 @@ export interface SelectOption {
   disabled?: boolean;
 }
 
+export type SelectSize = 'sm' | 'md' | 'lg';
+
 export interface SelectProps {
   value?: string;
   defaultValue?: string;
@@ -20,6 +22,7 @@ export interface SelectProps {
   name?: string;
   label?: string;
   hint?: string;
+  size?: SelectSize;
 }
 
 export function Select({
@@ -33,7 +36,9 @@ export function Select({
   name,
   label,
   hint,
+  size = 'md',
 }: SelectProps) {
+  const textClass = size === 'sm' ? 'text-caption' : 'text-body';
   const select = (
     <RadixSelect.Root
       value={value}
@@ -42,7 +47,7 @@ export function Select({
       disabled={disabled}
       name={name}
     >
-      <RadixSelect.Trigger id={id} className={[styles.trigger, 'text-body'].join(' ')}>
+      <RadixSelect.Trigger id={id} className={[styles.trigger, styles[size], textClass].join(' ')}>
         <RadixSelect.Value placeholder={placeholder} />
         <RadixSelect.Icon>
           <Icon icon={ChevronDown} scale="caption" />

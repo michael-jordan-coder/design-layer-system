@@ -4,6 +4,16 @@
   gap: var(--spacing-1);
 }
 
+.valueRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.trend {
+  display: inline-flex;
+}
+
 .label {
   color: var(--fg-muted);
 }

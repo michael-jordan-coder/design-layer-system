@@ -5,60 +5,48 @@
   gap: var(--spacing-4);
 }
 
-.pageHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.pageHeaderActions {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-}
-
-.searchWrapper {
-  width: 280px;
-}
-
-.formGrid {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-4);
-}
-
-.formActions {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.settingsList {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-4);
-}
-
-.settingsRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-4);
-}
-
-.settingsLabel {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-1);
-}
-
-.settingsHint {
-  color: var(--fg-muted);
-}
-
 .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing-4);
+}
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+}
+
+.rangeSelect {
+  width: 180px;
+}
+
+.cardMenuBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--fg-muted);
+  cursor: pointer;
+  transition:
+    background var(--animation-hover-duration) var(--animation-hover-curve),
+    color var(--animation-hover-duration) var(--animation-hover-curve);
+}
+
+.cardMenuBtn:hover {
+  background: var(--surface-hover);
+  color: var(--fg);
+}
+
+.customerCell {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
 }
 
 .iconBtn {

@@ -17,8 +17,6 @@ export { Table } from './surface/Table/Table';
 export type { TableProps, Column } from './surface/Table/Table';
 export { Dropdown } from './surface/Dropdown/Dropdown';
 export type { DropdownProps, DropdownItem, DropdownEntry } from './surface/Dropdown/Dropdown';
-export { Badge } from './surface/Badge/Badge';
-export type { BadgeProps } from './surface/Badge/Badge';
 export { Tooltip } from './surface/Tooltip/Tooltip';
 export type { TooltipProps } from './surface/Tooltip/Tooltip';
 export { Input } from './surface/Input/Input';
@@ -43,6 +41,8 @@ export { Tabs } from './accent/Tabs/Tabs';
 export type { TabsProps, TabItem } from './accent/Tabs/Tabs';
 export { Progress } from './accent/Progress/Progress';
 export type { ProgressProps } from './accent/Progress/Progress';
+export { Badge } from './accent/Badge/Badge';
+export type { BadgeProps } from './accent/Badge/Badge';
 
 // primitives
 export { Icon } from './primitives/Icon/Icon';

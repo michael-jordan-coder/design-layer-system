@@ -1,65 +1,105 @@
 import { useState } from 'react';
-import { Sidebar, Topbar, PageLayout, CommandMenu, Icon, Card, Stat, Table, Dropdown, Badge, Tooltip, Button, Switch, Checkbox, RadioGroup, Tabs, Input, Textarea, Select, Avatar, Progress } from '@layers/components';
+import {
+  Sidebar, Topbar, PageLayout, CommandMenu,
+  Icon, Card, Stat, Tabs, Progress, Tooltip, Dropdown,
+  Badge, Button, Select, Table, Avatar,
+} from '@layers/components';
 import type { CommandGroup, Column } from '@layers/components';
-import { LayoutDashboard, BarChart2, Users, DollarSign, ShoppingBag, Settings, Sun, Moon, Search, MoreHorizontal, Plus } from 'lucide-react';
+import { LayoutDashboard, Sun, Moon, Search, MoreHorizontal, Download } from 'lucide-react';
 import styles from './App.module.css';
 
 const NAV = [
-  { id: 'overview',  label: 'Overview',  icon: LayoutDashboard },
-  { id: 'analytics', label: 'Analytics', icon: BarChart2       },
-  { id: 'users',     label: 'Users',     icon: Users           },
-  { id: 'revenue',   label: 'Revenue',   icon: DollarSign      },
-  { id: 'orders',    label: 'Orders',    icon: ShoppingBag     },
+  { id: 'overview', label: 'Overview', icon: LayoutDashboard },
 ];
 
-const FOOTER_NAV = [{ id: 'settings', label: 'Settings', icon: Settings }];
+type Range = 'today' | 'week' | 'month';
 
-type User = { id: string; name: string; email: string; role: string; joined: string; status: string };
+const STATS_BY_RANGE: Record<Range, { revenue: string; users: string; orders: string; revenueTrend: string; usersTrend: string; ordersTrend: string }> = {
+  today: { revenue: '$1,240',  users: '384',    orders: '94',    revenueTrend: '+8%',  usersTrend: '+3%',  ordersTrend: '+12%' },
+  week:  { revenue: '$8,420',  users: '3,821',  orders: '612',   revenueTrend: '+12%', usersTrend: '+7%',  ordersTrend: '+9%'  },
+  month: { revenue: '$12,450', users: '15,204', orders: '2,418', revenueTrend: '+18%', usersTrend: '+15%', ordersTrend: '+22%' },
+};
 
-const USERS: User[] = [
-  { id: '1', name: 'Alex Johnson',  email: 'alex@example.com',   role: 'Admin',  joined: 'Jan 2024', status: 'Active'   },
-  { id: '2', name: 'Maria Chen',    email: 'maria@example.com',  role: 'Editor', joined: 'Feb 2024', status: 'Active'   },
-  { id: '3', name: 'Tom Rivera',    email: 'tom@example.com',    role: 'Viewer', joined: 'Mar 2024', status: 'Inactive' },
-  { id: '4', name: 'Sarah Kim',     email: 'sarah@example.com',  role: 'Admin',  joined: 'Apr 2024', status: 'Active'   },
-  { id: '5', name: 'James Liu',     email: 'james@example.com',  role: 'Editor', joined: 'May 2024', status: 'Active'   },
-  { id: '6', name: 'Priya Patel',   email: 'priya@example.com',  role: 'Viewer', joined: 'Jun 2024', status: 'Active'   },
-  { id: '7', name: 'Luca Ferrari',  email: 'luca@example.com',   role: 'Editor', joined: 'Jul 2024', status: 'Inactive' },
-  { id: '8', name: 'Emma Wilson',   email: 'emma@example.com',   role: 'Admin',  joined: 'Aug 2024', status: 'Active'   },
+type Order = { id: string; customer: string; amount: string; status: string; date: string };
+
+const RECENT_ORDERS: Order[] = [
+  { id: '#3492', customer: 'Alex Johnson', amount: '$142.00', status: 'Paid',    date: '2 min ago'  },
+  { id: '#3491', customer: 'Maria Chen',   amount: '$89.00',  status: 'Pending', date: '15 min ago' },
+  { id: '#3490', customer: 'Tom Rivera',   amount: '$320.00', status: 'Paid',    date: '1 hr ago'   },
+  { id: '#3489', customer: 'Sarah Kim',    amount: '$56.00',  status: 'Refunded',date: '3 hr ago'   },
+  { id: '#3488', customer: 'James Liu',    amount: '$215.00', status: 'Paid',    date: '5 hr ago'   },
 ];
 
-const USER_COLUMNS: Column<User>[] = [
+const ORDER_COLUMNS: Column<Order>[] = [
+  { key: 'id', label: 'Order' },
+  {
+    key: 'customer',
+    label: 'Customer',
+    render: (_, row) => (
+      <div className={styles.customerCell}>
+        <Avatar name={row.customer} size="sm" />
+        <span>{row.customer}</span>
+      </div>
+    ),
+  },
+  { key: 'amount', label: 'Amount' },
+  {
+    key: 'status',
+    label: 'Status',
+    render: value => <Badge label={String(value)} dot />,
+  },
+  { key: 'date', label: 'Date' },
+];
+
+type TopCustomer = { name: string; orders: number; spent: string };
+
+const TOP_CUSTOMERS: TopCustomer[] = [
+  { name: 'Alex Johnson',  orders: 12, spent: '$1,420' },
+  { name: 'Maria Chen',    orders: 9,  spent: '$1,180' },
+  { name: 'Tom Rivera',    orders: 7,  spent: '$890'   },
+  { name: 'Sarah Kim',     orders: 6,  spent: '$740'   },
+  { name: 'James Liu',     orders: 5,  spent: '$615'   },
+];
+
+const CUSTOMER_COLUMNS: Column<TopCustomer>[] = [
   {
     key: 'name',
-    label: 'Name',
-    sortable: true,
+    label: 'Customer',
     render: (_, row) => (
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-3)' }}>
+      <div className={styles.customerCell}>
         <Avatar name={row.name} size="sm" />
         <span>{row.name}</span>
       </div>
     ),
   },
-  { key: 'email',  label: 'Email'                   },
-  { key: 'role',   label: 'Role',   sortable: true  },
-  { key: 'joined', label: 'Joined', sortable: true  },
-  {
-    key: 'status',
-    label: 'Status',
-    sortable: true,
-    render: value => <Badge label={String(value)} dot />,
-  },
+  { key: 'orders', label: 'Orders' },
+  { key: 'spent',  label: 'Total spent' },
 ];
+
+function CardMenu() {
+  return (
+    <Dropdown
+      align="end"
+      trigger={
+        <button className={styles.cardMenuBtn} aria-label="Card options">
+          <Icon icon={MoreHorizontal} scale="caption" />
+        </button>
+      }
+      items={[
+        { id: 'refresh', label: 'Refresh' },
+        { id: 'export',  label: 'Export'  },
+        { type: 'separator' },
+        { id: 'hide',    label: 'Hide card' },
+      ]}
+    />
+  );
+}
 
 export default function App() {
   const [active, setActive]           = useState('overview');
   const [theme, setTheme]             = useState<'dark' | 'light'>('dark');
   const [commandOpen, setCommandOpen] = useState(false);
-  const [userQuery, setUserQuery]     = useState('');
-
-  const filteredUsers = USERS.filter(u =>
-    u.name.toLowerCase().includes(userQuery.toLowerCase()) ||
-    u.email.toLowerCase().includes(userQuery.toLowerCase())
-  );
+  const [range, setRange]             = useState<Range>('month');
 
   function toggleTheme() {
     const next = theme === 'dark' ? 'light' : 'dark';
@@ -70,11 +110,7 @@ export default function App() {
   const commandGroups: CommandGroup[] = [
     {
       label: 'Navigation',
-      items: [...NAV, ...FOOTER_NAV].map(n => ({
-        id: n.id,
-        label: n.label,
-        onSelect: () => setActive(n.id),
-      })),
+      items: NAV.map(n => ({ id: n.id, label: n.label, onSelect: () => setActive(n.id) })),
     },
     {
       label: 'Actions',
@@ -88,6 +124,8 @@ export default function App() {
     },
   ];
 
+  const s = STATS_BY_RANGE[range];
+
   return (
     <>
       <PageLayout
@@ -95,14 +133,13 @@ export default function App() {
           <Sidebar
             logo={<span className="text-body font-semibold">Layers</span>}
             items={NAV}
-            footer={FOOTER_NAV}
             activeId={active}
             onSelect={setActive}
           />
         }
         topbar={
           <Topbar
-            title={[...NAV, ...FOOTER_NAV].find(n => n.id === active)?.label}
+            title={NAV.find(n => n.id === active)?.label}
             actions={
               <>
                 <Tooltip content="Search" side="bottom">
@@ -123,10 +160,9 @@ export default function App() {
                   }
                   align="end"
                   items={[
-                    { id: 'export', label: 'Export data', onSelect: () => {} },
-                    { id: 'settings', label: 'Settings', onSelect: () => setActive('settings') },
+                    { id: 'export', label: 'Export data' },
                     { type: 'separator' },
-                    { id: 'logout', label: 'Log out', danger: true, onSelect: () => {} },
+                    { id: 'logout', label: 'Log out', danger: true },
                   ]}
                 />
               </>
@@ -134,175 +170,65 @@ export default function App() {
           />
         }
       >
-        {active === 'settings' ? (
-          <div className={styles.page}>
-            <Card title="Profile" description="Your public profile information">
-              <div className={styles.formGrid}>
-                <Input label="Display name" defaultValue="Alex Johnson" />
-                <Input label="Email" type="email" defaultValue="alex@example.com" />
-                <Select
-                  label="Timezone"
-                  defaultValue="utc"
-                  options={[
-                    { value: 'pst', label: 'Pacific (PT)'  },
-                    { value: 'est', label: 'Eastern (ET)'  },
-                    { value: 'utc', label: 'UTC'           },
-                    { value: 'cet', label: 'Central Europe' },
-                    { value: 'jst', label: 'Japan (JST)'   },
-                  ]}
-                />
-                <Textarea label="Bio" placeholder="Tell others a bit about yourself..." />
-                <div className={styles.formActions}>
-                  <Button variant="primary" size="md">Save changes</Button>
-                </div>
-              </div>
-            </Card>
-
-            <Card title="Theme" description="Choose how the dashboard appears">
-              <RadioGroup
-                value={theme}
-                onValueChange={v => {
-                  document.documentElement.dataset.theme = v;
-                  setTheme(v as 'dark' | 'light');
-                }}
+        <div className={styles.page}>
+          <div className={styles.pageHeader}>
+            <div className={styles.rangeSelect}>
+              <Select
+                size="sm"
+                value={range}
+                onValueChange={v => setRange(v as Range)}
                 options={[
-                  { value: 'dark', label: 'Dark', description: 'Optimised for low-light environments' },
-                  { value: 'light', label: 'Light', description: 'Clean and bright surface' },
+                  { value: 'today', label: 'Today'      },
+                  { value: 'week',  label: 'This week'  },
+                  { value: 'month', label: 'This month' },
                 ]}
               />
-            </Card>
-
-            <Card title="Email categories" description="Pick which emails to receive">
-              <div className={styles.settingsList}>
-                <label className={styles.settingsRow}>
-                  <div className={styles.settingsLabel}>
-                    <span className="text-body">Product updates</span>
-                    <span className={['text-caption', styles.settingsHint].join(' ')}>New features and changelog</span>
-                  </div>
-                  <Checkbox defaultChecked />
-                </label>
-                <label className={styles.settingsRow}>
-                  <div className={styles.settingsLabel}>
-                    <span className="text-body">Marketing</span>
-                    <span className={['text-caption', styles.settingsHint].join(' ')}>Tips, offers, and announcements</span>
-                  </div>
-                  <Checkbox />
-                </label>
-              </div>
-            </Card>
-
-            <Card title="Notifications" description="Choose what updates you want to receive">
-              <div className={styles.settingsList}>
-                <div className={styles.settingsRow}>
-                  <div className={styles.settingsLabel}>
-                    <span className="text-body">Email notifications</span>
-                    <span className={['text-caption', styles.settingsHint].join(' ')}>Receive updates by email</span>
-                  </div>
-                  <Switch defaultChecked />
-                </div>
-                <div className={styles.settingsRow}>
-                  <div className={styles.settingsLabel}>
-                    <span className="text-body">Push notifications</span>
-                    <span className={['text-caption', styles.settingsHint].join(' ')}>Get pinged on your devices</span>
-                  </div>
-                  <Switch />
-                </div>
-                <div className={styles.settingsRow}>
-                  <div className={styles.settingsLabel}>
-                    <span className="text-body">Weekly digest</span>
-                    <span className={['text-caption', styles.settingsHint].join(' ')}>A summary every Monday</span>
-                  </div>
-                  <Switch defaultChecked />
-                </div>
-              </div>
-            </Card>
-          </div>
-        ) : active === 'users' ? (
-          <div className={styles.page}>
-            <div className={styles.pageHeader}>
-              <div className={styles.searchWrapper}>
-                <Input
-                  size="sm"
-                  icon={Search}
-                  placeholder="Search users..."
-                  value={userQuery}
-                  onChange={e => setUserQuery(e.target.value)}
-                />
-              </div>
-              <div className={styles.pageHeaderActions}>
-                <Button variant="secondary" size="sm">Export</Button>
-                <Button variant="primary" size="sm" icon={Plus}>Invite user</Button>
-              </div>
             </div>
-            <Table
-              columns={USER_COLUMNS}
-              data={filteredUsers}
-              rowKey={r => r.id}
-              pageSize={5}
-            />
+            <Button variant="secondary" size="sm" icon={Download}>Export</Button>
           </div>
-        ) : (
-          <div className={styles.page}>
-            <Tabs
-              items={[
-                {
-                  id: 'today',
-                  label: 'Today',
-                  content: (
-                    <div className={styles.cards}>
-                      <Card title="Total Revenue" description="Compared to yesterday">
-                        <Stat value="$1,240" label="today" />
-                      </Card>
-                      <Card title="Active Users" description="Right now">
-                        <Stat value="384" label="online" />
-                      </Card>
-                      <Card title="New Orders" description="Today">
-                        <Stat value="94" label="today" />
-                      </Card>
-                    </div>
-                  ),
-                },
-                {
-                  id: 'week',
-                  label: 'This week',
-                  content: (
-                    <div className={styles.cards}>
-                      <Card title="Total Revenue" description="Compared to last week">
-                        <Stat value="$8,420" label="this week" />
-                      </Card>
-                      <Card title="Active Users" description="Unique visitors">
-                        <Stat value="3,821" label="this week" />
-                      </Card>
-                      <Card title="New Orders" description="This week">
-                        <Stat value="612" label="this week" />
-                      </Card>
-                    </div>
-                  ),
-                },
-                {
-                  id: 'month',
-                  label: 'This month',
-                  content: (
-                    <div className={styles.cards}>
-                      <Card title="Revenue goal" description="$12,450 of $20,000">
-                        <Stat value="62%" label="of monthly goal" />
-                        <Progress value={62} />
-                      </Card>
-                      <Card title="User growth" description="15,204 of 20,000 target">
-                        <Stat value="76%" label="of quarterly target" />
-                        <Progress value={76} />
-                      </Card>
-                      <Card title="Order volume" description="2,418 of 3,000 target">
-                        <Stat value="81%" label="of monthly target" />
-                        <Progress value={81} />
-                      </Card>
-                    </div>
-                  ),
-                },
-              ]}
-            />
+
+          <div className={styles.cards}>
+            <Card title="Total Revenue" description="Compared to previous period" action={<CardMenu />}>
+              <Stat value={s.revenue} label={range === 'today' ? 'today' : range === 'week' ? 'this week' : 'this month'} trend={<Badge label={s.revenueTrend} dot />} />
+            </Card>
+            <Card title="Active Users" description="Unique visitors" action={<CardMenu />}>
+              <Stat value={s.users} label={range === 'today' ? 'online now' : range === 'week' ? 'this week' : 'this month'} trend={<Badge label={s.usersTrend} dot />} />
+            </Card>
+            <Card title="New Orders" description="Compared to previous period" action={<CardMenu />}>
+              <Stat value={s.orders} label={range === 'today' ? 'today' : range === 'week' ? 'this week' : 'this month'} trend={<Badge label={s.ordersTrend} dot />} />
+              {range === 'month' && <Progress value={81} />}
+            </Card>
           </div>
-        )}
+
+          <Tabs
+            items={[
+              {
+                id: 'orders',
+                label: 'Recent orders',
+                content: (
+                  <Table
+                    columns={ORDER_COLUMNS}
+                    data={RECENT_ORDERS}
+                    rowKey={r => r.id}
+                    pageSize={5}
+                  />
+                ),
+              },
+              {
+                id: 'customers',
+                label: 'Top customers',
+                content: (
+                  <Table
+                    columns={CUSTOMER_COLUMNS}
+                    data={TOP_CUSTOMERS}
+                    rowKey={r => r.name}
+                    pageSize={5}
+                  />
+                ),
+              },
+            ]}
+          />
+        </div>
       </PageLayout>
 
       <CommandMenu
