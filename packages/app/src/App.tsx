@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Sidebar, Topbar, PageLayout, CommandMenu, Icon, Card, Stat, Table, Dropdown, Badge, Tooltip, Button, Switch, Checkbox, RadioGroup, Tabs, Input, Textarea, Select } from '@layers/components';
+import { Sidebar, Topbar, PageLayout, CommandMenu, Icon, Card, Stat, Table, Dropdown, Badge, Tooltip, Button, Switch, Checkbox, RadioGroup, Tabs, Input, Textarea, Select, Avatar } from '@layers/components';
 import type { CommandGroup, Column } from '@layers/components';
 import { LayoutDashboard, BarChart2, Users, DollarSign, ShoppingBag, Settings, Sun, Moon, Search, MoreHorizontal, Plus } from 'lucide-react';
 import styles from './App.module.css';
@@ -28,7 +28,17 @@ const USERS: User[] = [
 ];
 
 const USER_COLUMNS: Column<User>[] = [
-  { key: 'name',   label: 'Name',   sortable: true  },
+  {
+    key: 'name',
+    label: 'Name',
+    sortable: true,
+    render: (_, row) => (
+      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-3)' }}>
+        <Avatar name={row.name} size="sm" />
+        <span>{row.name}</span>
+      </div>
+    ),
+  },
   { key: 'email',  label: 'Email'                   },
   { key: 'role',   label: 'Role',   sortable: true  },
   { key: 'joined', label: 'Joined', sortable: true  },

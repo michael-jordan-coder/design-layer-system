@@ -27,6 +27,8 @@ export { Textarea } from './surface/Textarea/Textarea';
 export type { TextareaProps } from './surface/Textarea/Textarea';
 export { Select } from './surface/Select/Select';
 export type { SelectProps, SelectOption } from './surface/Select/Select';
+export { Avatar } from './surface/Avatar/Avatar';
+export type { AvatarProps, AvatarSize } from './surface/Avatar/Avatar';
 
 // accent
 export { Button } from './accent/Button/Button';
