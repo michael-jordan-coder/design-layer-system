@@ -25,6 +25,8 @@ export { Input } from './surface/Input/Input';
 export type { InputProps } from './surface/Input/Input';
 export { Textarea } from './surface/Textarea/Textarea';
 export type { TextareaProps } from './surface/Textarea/Textarea';
+export { Select } from './surface/Select/Select';
+export type { SelectProps, SelectOption } from './surface/Select/Select';
 
 // accent
 export { Button } from './accent/Button/Button';

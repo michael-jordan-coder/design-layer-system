@@ -1,0 +1,86 @@
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+  width: 100%;
+  height: 36px;
+  padding: 0 var(--spacing-3);
+  background: var(--surface);
+  border: var(--border-width-default) solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--fg);
+  cursor: pointer;
+  outline: none;
+  transition:
+    border-color var(--animation-hover-duration) var(--animation-hover-curve),
+    opacity      var(--animation-hover-duration) var(--animation-hover-curve);
+}
+
+.trigger:hover:not([data-disabled]):not([data-state="open"]) {
+  border-color: var(--fg-muted);
+}
+
+.trigger[data-state="open"] {
+  border-color: var(--accent);
+}
+
+.trigger[data-disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.trigger[data-placeholder] {
+  color: var(--fg-muted);
+}
+
+.content {
+  background: var(--surface);
+  border: var(--border-width-default) solid var(--border);
+  border-radius: var(--radius-md);
+  min-width: var(--radix-select-trigger-width);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  z-index: 50;
+  overflow: hidden;
+  animation: scaleIn var(--animation-scale-duration) var(--animation-scale-curve);
+  transform-origin: var(--radix-select-content-transform-origin);
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1);    }
+}
+
+.viewport {
+  padding: var(--spacing-1);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-sm);
+  color: var(--fg);
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  transition: background var(--animation-hover-duration) var(--animation-hover-curve);
+}
+
+.item[data-highlighted] {
+  background: var(--surface-hover);
+}
+
+.item[data-disabled] {
+  color: var(--fg-muted);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.indicator {
+  display: inline-flex;
+  align-items: center;
+  color: var(--accent);
+}
