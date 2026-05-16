@@ -1,0 +1,39 @@
+.root {
+  width: 36px;
+  height: 20px;
+  background: var(--surface-hover);
+  border: var(--border-width-default) solid var(--border);
+  border-radius: var(--radius-full);
+  padding: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    background   var(--animation-hover-duration) var(--animation-hover-curve),
+    border-color var(--animation-hover-duration) var(--animation-hover-curve),
+    opacity      var(--animation-hover-duration) var(--animation-hover-curve);
+}
+
+.root[data-state="checked"] {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.root:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.thumb {
+  display: block;
+  width: 14px;
+  height: 14px;
+  background: var(--foreground-revert);
+  border-radius: var(--radius-full);
+  transform: translateX(2px);
+  will-change: transform;
+  transition: transform var(--animation-scale-duration) var(--animation-scale-curve);
+}
+
+.thumb[data-state="checked"] {
+  transform: translateX(18px);
+}

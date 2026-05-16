@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Sidebar, Topbar, PageLayout, CommandMenu, Icon, Card, Stat, Table, Dropdown, Badge, Tooltip } from '@layers/components';
+import { Sidebar, Topbar, PageLayout, CommandMenu, Icon, Card, Stat, Table, Dropdown, Badge, Tooltip, Button, Switch, Checkbox } from '@layers/components';
 import type { CommandGroup, Column } from '@layers/components';
-import { LayoutDashboard, BarChart2, Users, DollarSign, ShoppingBag, Settings, Sun, Moon, Search, MoreHorizontal } from 'lucide-react';
+import { LayoutDashboard, BarChart2, Users, DollarSign, ShoppingBag, Settings, Sun, Moon, Search, MoreHorizontal, Plus } from 'lucide-react';
 import styles from './App.module.css';
 
 const NAV = [
@@ -118,8 +118,62 @@ export default function App() {
           />
         }
       >
-        {active === 'users' ? (
+        {active === 'settings' ? (
           <div className={styles.page}>
+            <Card title="Email categories" description="Pick which emails to receive">
+              <div className={styles.settingsList}>
+                <label className={styles.settingsRow}>
+                  <div className={styles.settingsLabel}>
+                    <span className="text-body">Product updates</span>
+                    <span className={['text-caption', styles.settingsHint].join(' ')}>New features and changelog</span>
+                  </div>
+                  <Checkbox defaultChecked />
+                </label>
+                <label className={styles.settingsRow}>
+                  <div className={styles.settingsLabel}>
+                    <span className="text-body">Marketing</span>
+                    <span className={['text-caption', styles.settingsHint].join(' ')}>Tips, offers, and announcements</span>
+                  </div>
+                  <Checkbox />
+                </label>
+              </div>
+            </Card>
+
+            <Card title="Notifications" description="Choose what updates you want to receive">
+              <div className={styles.settingsList}>
+                <div className={styles.settingsRow}>
+                  <div className={styles.settingsLabel}>
+                    <span className="text-body">Email notifications</span>
+                    <span className={['text-caption', styles.settingsHint].join(' ')}>Receive updates by email</span>
+                  </div>
+                  <Switch defaultChecked />
+                </div>
+                <div className={styles.settingsRow}>
+                  <div className={styles.settingsLabel}>
+                    <span className="text-body">Push notifications</span>
+                    <span className={['text-caption', styles.settingsHint].join(' ')}>Get pinged on your devices</span>
+                  </div>
+                  <Switch />
+                </div>
+                <div className={styles.settingsRow}>
+                  <div className={styles.settingsLabel}>
+                    <span className="text-body">Weekly digest</span>
+                    <span className={['text-caption', styles.settingsHint].join(' ')}>A summary every Monday</span>
+                  </div>
+                  <Switch defaultChecked />
+                </div>
+              </div>
+            </Card>
+          </div>
+        ) : active === 'users' ? (
+          <div className={styles.page}>
+            <div className={styles.pageHeader}>
+              <Button variant="ghost" size="sm">Filter</Button>
+              <div className={styles.pageHeaderActions}>
+                <Button variant="secondary" size="sm">Export</Button>
+                <Button variant="primary" size="sm" icon={Plus}>Invite user</Button>
+              </div>
+            </div>
             <Table
               columns={USER_COLUMNS}
               data={USERS}

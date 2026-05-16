@@ -23,6 +23,12 @@ export { Tooltip } from './surface/Tooltip/Tooltip';
 export type { TooltipProps } from './surface/Tooltip/Tooltip';
 
 // accent
+export { Button } from './accent/Button/Button';
+export type { ButtonProps, ButtonVariant, ButtonSize } from './accent/Button/Button';
+export { Switch } from './accent/Switch/Switch';
+export type { SwitchProps } from './accent/Switch/Switch';
+export { Checkbox } from './accent/Checkbox/Checkbox';
+export type { CheckboxProps } from './accent/Checkbox/Checkbox';
 
 // primitives
 export { Icon } from './primitives/Icon/Icon';

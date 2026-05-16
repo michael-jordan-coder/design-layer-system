@@ -1,0 +1,45 @@
+.root {
+  width: 18px;
+  height: 18px;
+  background: var(--surface);
+  border: var(--border-width-default) solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition:
+    background   var(--animation-hover-duration) var(--animation-hover-curve),
+    border-color var(--animation-hover-duration) var(--animation-hover-curve),
+    opacity      var(--animation-hover-duration) var(--animation-hover-curve);
+}
+
+.root:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.root[data-state="checked"],
+.root[data-state="indeterminate"] {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.root:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--foreground-revert);
+  animation: scaleIn var(--animation-scale-duration) var(--animation-scale-curve);
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.5); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
