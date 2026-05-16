@@ -1,0 +1,31 @@
+.page {
+  padding: var(--spacing-6);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-4);
+  padding: var(--spacing-6);
+}
+
+.iconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--fg-muted);
+  cursor: pointer;
+  transition:
+    background var(--animation-hover-duration) var(--animation-hover-curve),
+    color var(--animation-hover-duration) var(--animation-hover-curve);
+}
+
+.iconBtn:hover {
+  background: var(--surface-hover);
+  color: var(--fg);
+}

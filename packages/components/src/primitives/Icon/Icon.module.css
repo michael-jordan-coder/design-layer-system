@@ -1,0 +1,11 @@
+.icon {
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.caption    { width: var(--icon-caption);    height: var(--icon-caption);    }
+.body       { width: var(--icon-body);       height: var(--icon-body);       }
+.body-large { width: var(--icon-body-large); height: var(--icon-body-large); }
+.heading    { width: var(--icon-heading);    height: var(--icon-heading);    }
+.title      { width: var(--icon-title);      height: var(--icon-title);      }
+.display    { width: var(--icon-display);    height: var(--icon-display);    }

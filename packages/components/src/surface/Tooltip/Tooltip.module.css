@@ -1,0 +1,17 @@
+.content {
+  background: var(--surface-hover);
+  border: var(--border-width-default) solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-1) var(--spacing-2);
+  color: var(--fg);
+  animation: fadeIn var(--animation-hover-duration) var(--animation-hover-curve);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(2px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+.arrow {
+  fill: var(--border);
+}

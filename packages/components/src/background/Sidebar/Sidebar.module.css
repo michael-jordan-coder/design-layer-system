@@ -1,0 +1,122 @@
+.sidebar {
+  width: 220px;
+  min-height: 100vh;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-4);
+  gap: var(--spacing-1);
+  flex-shrink: 0;
+  border-right: var(--border-width-default) solid var(--border);
+  overflow: hidden;
+  transition:
+    width var(--animation-hover-duration) var(--animation-hover-curve),
+    background var(--animation-hover-duration) var(--animation-hover-curve),
+    border-color var(--animation-hover-duration) var(--animation-hover-curve);
+}
+
+.collapsed {
+  width: var(--spacing-16);
+}
+
+/* ── Header ─────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-4);
+  min-height: 32px;
+  flex-shrink: 0;
+}
+
+.logo {
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--fg);
+}
+
+.toggleBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: var(--spacing-1);
+  color: var(--fg-muted);
+  cursor: pointer;
+  transition:
+    background var(--animation-hover-duration) var(--animation-hover-curve),
+    color var(--animation-hover-duration) var(--animation-hover-curve);
+}
+
+.toggleBtn:hover {
+  background: var(--surface-hover);
+  color: var(--fg);
+}
+
+/* ── Nav ─────────────────────────────────────── */
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-md);
+  color: var(--fg-muted);
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  white-space: nowrap;
+  transition:
+    background var(--animation-hover-duration) var(--animation-hover-curve),
+    color var(--animation-hover-duration) var(--animation-hover-curve);
+}
+
+.item:hover {
+  background: var(--surface-hover);
+  color: var(--fg);
+}
+
+.active {
+  background: var(--accent);
+  color: var(--foreground-revert);
+}
+
+.active:hover {
+  background: var(--accent);
+  color: var(--foreground-revert);
+  opacity: 0.88;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: currentColor;
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+
+.active .dot { opacity: 1; }
+
+.label {
+  overflow: hidden;
+}
+
+.itemCollapsed {
+  justify-content: center;
+  padding: var(--spacing-2);
+  gap: 0;
+}
+
+/* ── Footer ─────────────────────────────────── */
+.footer { margin-top: auto; }

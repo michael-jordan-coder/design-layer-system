@@ -1,0 +1,101 @@
+.wrapper {
+  background: var(--surface);
+  border: var(--border-width-default) solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* ── Header ─────────────────────────────────── */
+.th {
+  text-align: left;
+  padding: var(--spacing-3) var(--spacing-4);
+  color: var(--fg-muted);
+  border-bottom: var(--border-width-default) solid var(--border);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.th.sortable {
+  cursor: pointer;
+}
+
+.th.sortable:hover {
+  color: var(--fg);
+}
+
+.thInner {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+/* ── Body ────────────────────────────────────── */
+.tr {
+  transition: background var(--animation-hover-duration) var(--animation-hover-curve);
+}
+
+.tr:hover .td {
+  background: var(--surface-hover);
+}
+
+.td {
+  padding: var(--spacing-3) var(--spacing-4);
+  color: var(--fg);
+  border-bottom: var(--border-width-default) solid var(--border);
+  transition: background var(--animation-hover-duration) var(--animation-hover-curve);
+}
+
+.tr:last-child .td {
+  border-bottom: none;
+}
+
+.empty {
+  padding: var(--spacing-8) var(--spacing-4);
+  color: var(--fg-muted);
+  text-align: center;
+}
+
+/* ── Footer ─────────────────────────────────── */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-3) var(--spacing-4);
+  border-top: var(--border-width-default) solid var(--border);
+  color: var(--fg-muted);
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.pageBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-md);
+  border: none;
+  background: none;
+  color: var(--fg-muted);
+  cursor: pointer;
+  transition:
+    background var(--animation-hover-duration) var(--animation-hover-curve),
+    color var(--animation-hover-duration) var(--animation-hover-curve);
+}
+
+.pageBtn:hover:not(:disabled) {
+  background: var(--surface-hover);
+  color: var(--fg);
+}
+
+.pageBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

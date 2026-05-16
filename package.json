@@ -1,0 +1,8 @@
+{
+  "name": "design-layer-system",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter @layers/app dev",
+    "build": "pnpm --filter @layers/app build"
+  }
+}

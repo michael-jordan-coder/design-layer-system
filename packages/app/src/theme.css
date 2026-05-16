@@ -1,0 +1,33 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --accent: var(--accent-blue-500);
+}
+
+[data-theme="dark"] {
+  --bg:            var(--background-dark);
+  --surface:       var(--surface-dark);
+  --surface-hover: var(--surface-hover-dark);
+  --fg:            var(--foreground-dark);
+  --fg-muted:      var(--foreground-muted-dark);
+  --border:        var(--border-dark);
+}
+
+[data-theme="light"] {
+  --bg:            var(--background-light);
+  --surface:       var(--surface-light);
+  --surface-hover: var(--surface-hover-light);
+  --fg:            var(--foreground-light);
+  --fg-muted:      var(--foreground-muted-light);
+  --border:        var(--border-light);
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  transition:
+    background var(--animation-hover-duration) var(--animation-hover-curve),
+    color      var(--animation-hover-duration) var(--animation-hover-curve);
+}
