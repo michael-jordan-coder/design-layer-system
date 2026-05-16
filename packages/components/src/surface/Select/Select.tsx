@@ -18,6 +18,8 @@ export interface SelectProps {
   disabled?: boolean;
   id?: string;
   name?: string;
+  label?: string;
+  hint?: string;
 }
 
 export function Select({
@@ -29,8 +31,10 @@ export function Select({
   disabled,
   id,
   name,
+  label,
+  hint,
 }: SelectProps) {
-  return (
+  const select = (
     <RadixSelect.Root
       value={value}
       defaultValue={defaultValue}
@@ -65,5 +69,17 @@ export function Select({
         </RadixSelect.Content>
       </RadixSelect.Portal>
     </RadixSelect.Root>
+  );
+
+  if (!label && !hint) return select;
+
+  return (
+    <div className={styles.field}>
+      {label && (
+        <label htmlFor={id} className={[styles.label, 'text-caption'].join(' ')}>{label}</label>
+      )}
+      {select}
+      {hint && <span className={[styles.hint, 'text-caption'].join(' ')}>{hint}</span>}
+    </div>
   );
 }

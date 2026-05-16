@@ -138,31 +138,20 @@ export default function App() {
           <div className={styles.page}>
             <Card title="Profile" description="Your public profile information">
               <div className={styles.formGrid}>
-                <label className={styles.formField}>
-                  <span className={['text-caption', styles.formLabel].join(' ')}>Display name</span>
-                  <Input defaultValue="Alex Johnson" />
-                </label>
-                <label className={styles.formField}>
-                  <span className={['text-caption', styles.formLabel].join(' ')}>Email</span>
-                  <Input type="email" defaultValue="alex@example.com" />
-                </label>
-                <label className={styles.formField}>
-                  <span className={['text-caption', styles.formLabel].join(' ')}>Timezone</span>
-                  <Select
-                    defaultValue="utc"
-                    options={[
-                      { value: 'pst', label: 'Pacific (PT)'  },
-                      { value: 'est', label: 'Eastern (ET)'  },
-                      { value: 'utc', label: 'UTC'           },
-                      { value: 'cet', label: 'Central Europe' },
-                      { value: 'jst', label: 'Japan (JST)'   },
-                    ]}
-                  />
-                </label>
-                <label className={styles.formField}>
-                  <span className={['text-caption', styles.formLabel].join(' ')}>Bio</span>
-                  <Textarea placeholder="Tell others a bit about yourself..." />
-                </label>
+                <Input label="Display name" defaultValue="Alex Johnson" />
+                <Input label="Email" type="email" defaultValue="alex@example.com" />
+                <Select
+                  label="Timezone"
+                  defaultValue="utc"
+                  options={[
+                    { value: 'pst', label: 'Pacific (PT)'  },
+                    { value: 'est', label: 'Eastern (ET)'  },
+                    { value: 'utc', label: 'UTC'           },
+                    { value: 'cet', label: 'Central Europe' },
+                    { value: 'jst', label: 'Japan (JST)'   },
+                  ]}
+                />
+                <Textarea label="Bio" placeholder="Tell others a bit about yourself..." />
                 <div className={styles.formActions}>
                   <Button variant="primary" size="md">Save changes</Button>
                 </div>

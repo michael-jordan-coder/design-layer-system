@@ -1,3 +1,17 @@
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.label {
+  color: var(--fg-muted);
+}
+
+.hint {
+  color: var(--fg-muted);
+}
+
 .textarea {
   display: block;
   width: 100%;
