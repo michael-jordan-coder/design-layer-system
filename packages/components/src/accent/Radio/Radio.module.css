@@ -1,0 +1,66 @@
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  cursor: pointer;
+}
+
+.item {
+  width: 18px;
+  height: 18px;
+  background: var(--surface);
+  border: var(--border-width-default) solid var(--border);
+  border-radius: var(--radius-full);
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  transition:
+    border-color var(--animation-hover-duration) var(--animation-hover-curve),
+    opacity      var(--animation-hover-duration) var(--animation-hover-curve);
+}
+
+.item:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.item[data-state="checked"] {
+  border-color: var(--accent);
+}
+
+.item:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: var(--radius-full);
+  animation: scaleIn var(--animation-scale-duration) var(--animation-scale-curve);
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.description {
+  color: var(--fg-muted);
+}

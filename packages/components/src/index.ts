@@ -29,6 +29,8 @@ export { Switch } from './accent/Switch/Switch';
 export type { SwitchProps } from './accent/Switch/Switch';
 export { Checkbox } from './accent/Checkbox/Checkbox';
 export type { CheckboxProps } from './accent/Checkbox/Checkbox';
+export { RadioGroup } from './accent/Radio/Radio';
+export type { RadioGroupProps, RadioOption } from './accent/Radio/Radio';
 
 // primitives
 export { Icon } from './primitives/Icon/Icon';

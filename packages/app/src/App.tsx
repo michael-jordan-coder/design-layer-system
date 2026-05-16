@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Sidebar, Topbar, PageLayout, CommandMenu, Icon, Card, Stat, Table, Dropdown, Badge, Tooltip, Button, Switch, Checkbox } from '@layers/components';
+import { Sidebar, Topbar, PageLayout, CommandMenu, Icon, Card, Stat, Table, Dropdown, Badge, Tooltip, Button, Switch, Checkbox, RadioGroup } from '@layers/components';
 import type { CommandGroup, Column } from '@layers/components';
 import { LayoutDashboard, BarChart2, Users, DollarSign, ShoppingBag, Settings, Sun, Moon, Search, MoreHorizontal, Plus } from 'lucide-react';
 import styles from './App.module.css';
@@ -120,6 +120,20 @@ export default function App() {
       >
         {active === 'settings' ? (
           <div className={styles.page}>
+            <Card title="Theme" description="Choose how the dashboard appears">
+              <RadioGroup
+                value={theme}
+                onValueChange={v => {
+                  document.documentElement.dataset.theme = v;
+                  setTheme(v as 'dark' | 'light');
+                }}
+                options={[
+                  { value: 'dark', label: 'Dark', description: 'Optimised for low-light environments' },
+                  { value: 'light', label: 'Light', description: 'Clean and bright surface' },
+                ]}
+              />
+            </Card>
+
             <Card title="Email categories" description="Pick which emails to receive">
               <div className={styles.settingsList}>
                 <label className={styles.settingsRow}>
