@@ -44,7 +44,6 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing-4);
-  padding: var(--spacing-6);
 }
 
 .iconBtn {

@@ -31,6 +31,8 @@ export { Checkbox } from './accent/Checkbox/Checkbox';
 export type { CheckboxProps } from './accent/Checkbox/Checkbox';
 export { RadioGroup } from './accent/Radio/Radio';
 export type { RadioGroupProps, RadioOption } from './accent/Radio/Radio';
+export { Tabs } from './accent/Tabs/Tabs';
+export type { TabsProps, TabItem } from './accent/Tabs/Tabs';
 
 // primitives
 export { Icon } from './primitives/Icon/Icon';

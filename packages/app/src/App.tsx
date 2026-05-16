@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Sidebar, Topbar, PageLayout, CommandMenu, Icon, Card, Stat, Table, Dropdown, Badge, Tooltip, Button, Switch, Checkbox, RadioGroup } from '@layers/components';
+import { Sidebar, Topbar, PageLayout, CommandMenu, Icon, Card, Stat, Table, Dropdown, Badge, Tooltip, Button, Switch, Checkbox, RadioGroup, Tabs } from '@layers/components';
 import type { CommandGroup, Column } from '@layers/components';
 import { LayoutDashboard, BarChart2, Users, DollarSign, ShoppingBag, Settings, Sun, Moon, Search, MoreHorizontal, Plus } from 'lucide-react';
 import styles from './App.module.css';
@@ -196,16 +196,62 @@ export default function App() {
             />
           </div>
         ) : (
-          <div className={styles.cards}>
-            <Card title="Total Revenue" description="Compared to last month">
-              <Stat value="$12,450" label="this month" />
-            </Card>
-            <Card title="Active Users" description="Unique visitors this week">
-              <Stat value="3,821" label="this week" />
-            </Card>
-            <Card title="New Orders" description="Orders placed today">
-              <Stat value="94" label="today" />
-            </Card>
+          <div className={styles.page}>
+            <Tabs
+              items={[
+                {
+                  id: 'today',
+                  label: 'Today',
+                  content: (
+                    <div className={styles.cards}>
+                      <Card title="Total Revenue" description="Compared to yesterday">
+                        <Stat value="$1,240" label="today" />
+                      </Card>
+                      <Card title="Active Users" description="Right now">
+                        <Stat value="384" label="online" />
+                      </Card>
+                      <Card title="New Orders" description="Today">
+                        <Stat value="94" label="today" />
+                      </Card>
+                    </div>
+                  ),
+                },
+                {
+                  id: 'week',
+                  label: 'This week',
+                  content: (
+                    <div className={styles.cards}>
+                      <Card title="Total Revenue" description="Compared to last week">
+                        <Stat value="$8,420" label="this week" />
+                      </Card>
+                      <Card title="Active Users" description="Unique visitors">
+                        <Stat value="3,821" label="this week" />
+                      </Card>
+                      <Card title="New Orders" description="This week">
+                        <Stat value="612" label="this week" />
+                      </Card>
+                    </div>
+                  ),
+                },
+                {
+                  id: 'month',
+                  label: 'This month',
+                  content: (
+                    <div className={styles.cards}>
+                      <Card title="Total Revenue" description="Compared to last month">
+                        <Stat value="$12,450" label="this month" />
+                      </Card>
+                      <Card title="Active Users" description="Unique visitors">
+                        <Stat value="15,204" label="this month" />
+                      </Card>
+                      <Card title="New Orders" description="This month">
+                        <Stat value="2,418" label="this month" />
+                      </Card>
+                    </div>
+                  ),
+                },
+              ]}
+            />
           </div>
         )}
       </PageLayout>
