@@ -41,6 +41,8 @@ export { RadioGroup } from './accent/Radio/Radio';
 export type { RadioGroupProps, RadioOption } from './accent/Radio/Radio';
 export { Tabs } from './accent/Tabs/Tabs';
 export type { TabsProps, TabItem } from './accent/Tabs/Tabs';
+export { Progress } from './accent/Progress/Progress';
+export type { ProgressProps } from './accent/Progress/Progress';
 
 // primitives
 export { Icon } from './primitives/Icon/Icon';

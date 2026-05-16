@@ -1,0 +1,17 @@
+.root {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 6px;
+  background: var(--surface-hover);
+  border-radius: var(--radius-full);
+  transform: translateZ(0);
+}
+
+.indicator {
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  border-radius: var(--radius-full);
+  transition: transform var(--animation-scale-duration) var(--animation-hover-curve);
+}

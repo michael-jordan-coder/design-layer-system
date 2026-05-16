@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Sidebar, Topbar, PageLayout, CommandMenu, Icon, Card, Stat, Table, Dropdown, Badge, Tooltip, Button, Switch, Checkbox, RadioGroup, Tabs, Input, Textarea, Select, Avatar } from '@layers/components';
+import { Sidebar, Topbar, PageLayout, CommandMenu, Icon, Card, Stat, Table, Dropdown, Badge, Tooltip, Button, Switch, Checkbox, RadioGroup, Tabs, Input, Textarea, Select, Avatar, Progress } from '@layers/components';
 import type { CommandGroup, Column } from '@layers/components';
 import { LayoutDashboard, BarChart2, Users, DollarSign, ShoppingBag, Settings, Sun, Moon, Search, MoreHorizontal, Plus } from 'lucide-react';
 import styles from './App.module.css';
@@ -294,14 +294,17 @@ export default function App() {
                   label: 'This month',
                   content: (
                     <div className={styles.cards}>
-                      <Card title="Total Revenue" description="Compared to last month">
-                        <Stat value="$12,450" label="this month" />
+                      <Card title="Revenue goal" description="$12,450 of $20,000">
+                        <Stat value="62%" label="of monthly goal" />
+                        <Progress value={62} />
                       </Card>
-                      <Card title="Active Users" description="Unique visitors">
-                        <Stat value="15,204" label="this month" />
+                      <Card title="User growth" description="15,204 of 20,000 target">
+                        <Stat value="76%" label="of quarterly target" />
+                        <Progress value={76} />
                       </Card>
-                      <Card title="New Orders" description="This month">
-                        <Stat value="2,418" label="this month" />
+                      <Card title="Order volume" description="2,418 of 3,000 target">
+                        <Stat value="81%" label="of monthly target" />
+                        <Progress value={81} />
                       </Card>
                     </div>
                   ),
