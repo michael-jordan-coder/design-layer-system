@@ -23,6 +23,8 @@ export { Tooltip } from './surface/Tooltip/Tooltip';
 export type { TooltipProps } from './surface/Tooltip/Tooltip';
 export { Input } from './surface/Input/Input';
 export type { InputProps } from './surface/Input/Input';
+export { Textarea } from './surface/Textarea/Textarea';
+export type { TextareaProps } from './surface/Textarea/Textarea';
 
 // accent
 export { Button } from './accent/Button/Button';

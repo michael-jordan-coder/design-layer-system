@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Sidebar, Topbar, PageLayout, CommandMenu, Icon, Card, Stat, Table, Dropdown, Badge, Tooltip, Button, Switch, Checkbox, RadioGroup, Tabs, Input } from '@layers/components';
+import { Sidebar, Topbar, PageLayout, CommandMenu, Icon, Card, Stat, Table, Dropdown, Badge, Tooltip, Button, Switch, Checkbox, RadioGroup, Tabs, Input, Textarea } from '@layers/components';
 import type { CommandGroup, Column } from '@layers/components';
 import { LayoutDashboard, BarChart2, Users, DollarSign, ShoppingBag, Settings, Sun, Moon, Search, MoreHorizontal, Plus } from 'lucide-react';
 import styles from './App.module.css';
@@ -126,6 +126,26 @@ export default function App() {
       >
         {active === 'settings' ? (
           <div className={styles.page}>
+            <Card title="Profile" description="Your public profile information">
+              <div className={styles.formGrid}>
+                <label className={styles.formField}>
+                  <span className={['text-caption', styles.formLabel].join(' ')}>Display name</span>
+                  <Input defaultValue="Alex Johnson" />
+                </label>
+                <label className={styles.formField}>
+                  <span className={['text-caption', styles.formLabel].join(' ')}>Email</span>
+                  <Input type="email" defaultValue="alex@example.com" />
+                </label>
+                <label className={styles.formField}>
+                  <span className={['text-caption', styles.formLabel].join(' ')}>Bio</span>
+                  <Textarea placeholder="Tell others a bit about yourself..." />
+                </label>
+                <div className={styles.formActions}>
+                  <Button variant="primary" size="md">Save changes</Button>
+                </div>
+              </div>
+            </Card>
+
             <Card title="Theme" description="Choose how the dashboard appears">
               <RadioGroup
                 value={theme}
