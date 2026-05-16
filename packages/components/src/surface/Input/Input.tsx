@@ -4,19 +4,24 @@ import type { LucideIcon } from 'lucide-react';
 import { Icon } from '../../primitives/Icon/Icon';
 import styles from './Input.module.css';
 
+export type InputSize = 'sm' | 'md' | 'lg';
+
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   icon?: LucideIcon;
   trailing?: ReactNode;
   label?: string;
   hint?: string;
+  size?: InputSize;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-  { icon, trailing, label, hint, className, id, ...rest },
+  { icon, trailing, label, hint, size = 'md', className, id, ...rest },
   ref,
 ) {
+  const textClass = size === 'sm' ? 'text-caption' : 'text-body';
+
   const field = (
-    <div className={styles.wrapper}>
+    <div className={[styles.wrapper, styles[size]].join(' ')}>
       {icon && (
         <span className={styles.icon}>
           <Icon icon={icon} scale="caption" />
@@ -25,7 +30,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       <input
         ref={ref}
         id={id}
-        className={[styles.input, 'text-body'].join(' ')}
+        className={[styles.input, textClass].join(' ')}
         {...rest}
       />
       {trailing && <span className={styles.trailing}>{trailing}</span>}

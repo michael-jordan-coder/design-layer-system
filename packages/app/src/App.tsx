@@ -222,6 +222,7 @@ export default function App() {
             <div className={styles.pageHeader}>
               <div className={styles.searchWrapper}>
                 <Input
+                  size="sm"
                   icon={Search}
                   placeholder="Search users..."
                   value={userQuery}
