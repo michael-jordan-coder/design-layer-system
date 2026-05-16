@@ -11,6 +11,31 @@
   gap: var(--spacing-4);
 }
 
+.aiPage {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: var(--spacing-6);
+  gap: var(--spacing-6);
+}
+
+.aiMessages {
+  flex: 1;
+  overflow-y: auto;
+  max-width: 720px;
+  width: 100%;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.aiComposer {
+  max-width: 720px;
+  width: 100%;
+  align-self: center;
+}
+
 .pageHeader {
   display: flex;
   align-items: center;

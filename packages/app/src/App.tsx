@@ -2,14 +2,15 @@ import { useState } from 'react';
 import {
   Sidebar, Topbar, PageLayout, CommandMenu,
   Icon, Card, Stat, Tabs, Progress, Tooltip, Dropdown,
-  Badge, Button, Select, Table, Avatar,
+  Badge, Button, Select, Table, Avatar, ChatComposer, ChatMessage,
 } from '@layers/components';
 import type { CommandGroup, Column } from '@layers/components';
-import { LayoutDashboard, Sun, Moon, Search, MoreHorizontal, Download } from 'lucide-react';
+import { LayoutDashboard, Sun, Moon, Search, MoreHorizontal, Download, Sparkles } from 'lucide-react';
 import styles from './App.module.css';
 
 const NAV = [
   { id: 'overview', label: 'Overview', icon: LayoutDashboard },
+  { id: 'ai',       label: 'AI',       icon: Sparkles        },
 ];
 
 type Range = 'today' | 'week' | 'month';
@@ -170,6 +171,21 @@ export default function App() {
           />
         }
       >
+        {active === 'ai' ? (
+          <div className={styles.aiPage}>
+            <div className={styles.aiMessages}>
+              <ChatMessage role="user" content="What's the difference between var, let, and const in JavaScript?" />
+              <ChatMessage
+                role="assistant"
+                content={`They're all ways to declare variables, but they differ in scope and mutability.\n\nvar is function-scoped and can be redeclared. let is block-scoped and reassignable. const is block-scoped and cannot be reassigned after declaration (though objects assigned to const can still have their properties mutated).\n\nModern code generally uses const by default, let when you need to reassign, and avoids var entirely.`}
+              />
+              <ChatMessage role="user" content="Got it — and what about hoisting?" />
+            </div>
+            <div className={styles.aiComposer}>
+              <ChatComposer placeholder="Ask anything..." />
+            </div>
+          </div>
+        ) : (
         <div className={styles.page}>
           <div className={styles.pageHeader}>
             <div className={styles.rangeSelect}>
@@ -229,6 +245,7 @@ export default function App() {
             ]}
           />
         </div>
+        )}
       </PageLayout>
 
       <CommandMenu

@@ -27,6 +27,10 @@ export { Select } from './surface/Select/Select';
 export type { SelectProps, SelectOption } from './surface/Select/Select';
 export { Avatar } from './surface/Avatar/Avatar';
 export type { AvatarProps, AvatarSize } from './surface/Avatar/Avatar';
+export { ChatComposer } from './surface/ChatComposer/ChatComposer';
+export type { ChatComposerProps } from './surface/ChatComposer/ChatComposer';
+export { ChatMessage } from './surface/ChatMessage/ChatMessage';
+export type { ChatMessageProps, ChatMessageRole } from './surface/ChatMessage/ChatMessage';
 
 // accent
 export { Button } from './accent/Button/Button';

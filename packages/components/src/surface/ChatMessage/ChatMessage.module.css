@@ -1,0 +1,30 @@
+.row {
+  display: flex;
+  width: 100%;
+}
+
+.user {
+  justify-content: flex-end;
+}
+
+.assistant {
+  justify-content: flex-start;
+}
+
+.content {
+  color: var(--fg);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  line-height: 1.6;
+}
+
+.user .content {
+  background: var(--surface-hover);
+  border-radius: var(--radius-2xl);
+  padding: var(--spacing-3) var(--spacing-4);
+  max-width: 75%;
+}
+
+.assistant .content {
+  max-width: 100%;
+}
