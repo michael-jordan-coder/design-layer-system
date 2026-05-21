@@ -28,9 +28,15 @@ export type { SelectProps, SelectOption } from './surface/Select/Select';
 export { Avatar } from './surface/Avatar/Avatar';
 export type { AvatarProps, AvatarSize } from './surface/Avatar/Avatar';
 export { ChatComposer } from './surface/ChatComposer/ChatComposer';
-export type { ChatComposerProps } from './surface/ChatComposer/ChatComposer';
+export type { ChatComposerProps, ChatComposerMode, SlashCommand } from './surface/ChatComposer/ChatComposer';
 export { ChatMessage } from './surface/ChatMessage/ChatMessage';
 export type { ChatMessageProps, ChatMessageRole } from './surface/ChatMessage/ChatMessage';
+export { SuggestedPrompts } from './surface/SuggestedPrompts/SuggestedPrompts';
+export type { SuggestedPromptsProps, SuggestedPrompt } from './surface/SuggestedPrompts/SuggestedPrompts';
+export { ThinkingDisclosure } from './surface/ThinkingDisclosure/ThinkingDisclosure';
+export type { ThinkingDisclosureProps } from './surface/ThinkingDisclosure/ThinkingDisclosure';
+export { SourceRail } from './surface/SourceRail/SourceRail';
+export type { SourceRailProps, Source } from './surface/SourceRail/SourceRail';
 
 // accent
 export { Button } from './accent/Button/Button';
@@ -47,6 +53,8 @@ export { Progress } from './accent/Progress/Progress';
 export type { ProgressProps } from './accent/Progress/Progress';
 export { Badge } from './accent/Badge/Badge';
 export type { BadgeProps } from './accent/Badge/Badge';
+export { Citation } from './accent/Citation/Citation';
+export type { CitationProps } from './accent/Citation/Citation';
 
 // primitives
 export { Icon } from './primitives/Icon/Icon';

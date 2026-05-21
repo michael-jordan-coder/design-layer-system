@@ -9,6 +9,7 @@ export interface NavItem {
   id: string;
   label: string;
   icon?: LucideIcon;
+  ai?: boolean;
 }
 
 export interface SidebarProps {
@@ -22,11 +23,21 @@ export interface SidebarProps {
 function NavButton({ item, active, collapsed, onSelect }: { item: NavItem; active: boolean; collapsed: boolean; onSelect?: (id: string) => void }) {
   return (
     <button
-      className={[styles.item, 'text-caption', active ? styles.active : '', collapsed ? styles.itemCollapsed : ''].filter(Boolean).join(' ')}
+      className={[
+        styles.item,
+        'text-caption',
+        active ? styles.active : '',
+        collapsed ? styles.itemCollapsed : '',
+        item.ai ? styles.ai : '',
+      ].filter(Boolean).join(' ')}
       onClick={() => onSelect?.(item.id)}
     >
       {item.icon ? <Icon icon={item.icon} scale="caption" /> : <span className={styles.dot} />}
-      {!collapsed && <span className={styles.label}>{item.label}</span>}
+      {!collapsed && (
+        <span className={styles.label}>
+          {item.ai ? <span className={styles.aiText}>{item.label}</span> : item.label}
+        </span>
+      )}
     </button>
   );
 }

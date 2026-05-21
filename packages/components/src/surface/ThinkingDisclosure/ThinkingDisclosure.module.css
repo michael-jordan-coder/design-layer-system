@@ -1,0 +1,84 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: 6px var(--spacing-2);
+  margin-left: calc(var(--spacing-2) * -1);
+  background: none;
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--fg-muted);
+  cursor: pointer;
+  align-self: flex-start;
+  transition:
+    background var(--animation-hover-duration) var(--animation-hover-curve),
+    color      var(--animation-hover-duration) var(--animation-hover-curve);
+}
+
+.trigger:hover {
+  background: var(--surface-hover);
+  color: var(--fg);
+}
+
+.trigger:focus-visible {
+  outline: var(--border-width-thick) solid var(--accent);
+  outline-offset: 1px;
+}
+
+.chevronWrap {
+  display: inline-flex;
+  transition: transform var(--animation-hover-duration) var(--animation-hover-curve);
+}
+
+.chevronOpen {
+  transform: rotate(90deg);
+}
+
+.brainWrap {
+  display: inline-flex;
+}
+
+.summary {
+  color: inherit;
+}
+
+/* Shimmer the summary while the model is actively thinking. */
+.thinking .summary {
+  background: linear-gradient(
+    90deg,
+    var(--fg-muted) 0%,
+    var(--fg)       50%,
+    var(--fg-muted) 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: thinking-shimmer 2s linear infinite;
+}
+
+@keyframes thinking-shimmer {
+  0%   { background-position:  100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thinking .summary { animation: none; }
+}
+
+.body {
+  padding: var(--spacing-3) 0 var(--spacing-2) var(--spacing-5);
+  margin-left: var(--spacing-2);
+  border-left: var(--border-width-default) solid var(--border);
+  color: var(--fg-muted);
+  white-space: pre-wrap;
+  line-height: 1.7;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}

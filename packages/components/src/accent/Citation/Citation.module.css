@@ -1,0 +1,37 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  margin: 0 2px;
+  background: var(--surface-hover);
+  border: var(--border-width-default) solid var(--border);
+  border-radius: var(--radius-full);
+  color: var(--fg-muted);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0;
+  text-decoration: none;
+  vertical-align: super;
+  cursor: pointer;
+  transition:
+    background   var(--animation-hover-duration) var(--animation-hover-curve),
+    border-color var(--animation-hover-duration) var(--animation-hover-curve),
+    color        var(--animation-hover-duration) var(--animation-hover-curve);
+}
+
+.chip:hover,
+.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--foreground-revert);
+}
+
+.chip:focus-visible {
+  outline: var(--border-width-thick) solid var(--accent);
+  outline-offset: 1px;
+}

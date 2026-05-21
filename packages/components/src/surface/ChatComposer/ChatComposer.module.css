@@ -1,7 +1,74 @@
 .composer {
+  position: relative;
   background: var(--surface);
   border-radius: var(--radius-2xl);
   padding: var(--spacing-2);
+}
+
+/* ── Slash command menu ──────────────────────────────────────────── */
+
+.slashMenu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(100% + var(--spacing-2));
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-1);
+  background: var(--surface);
+  border: var(--border-width-default) solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  z-index: 2;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.slashItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-2) var(--spacing-3);
+  background: none;
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--fg);
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+}
+
+.slashItemActive {
+  background: var(--surface-hover);
+}
+
+.slashIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: var(--fg-muted);
+  flex-shrink: 0;
+}
+
+.slashItemActive .slashIcon {
+  color: var(--fg);
+}
+
+.slashName {
+  color: var(--fg);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  flex-shrink: 0;
+}
+
+.slashDesc {
+  color: var(--fg-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
 }
 
 .row {
@@ -96,4 +163,49 @@
   height: 10px;
   background: currentColor;
   border-radius: var(--radius-sm);
+}
+
+/* ── Mode chips ───────────────────────────────────────────────────── */
+
+.modes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-1);
+  padding: var(--spacing-2) var(--spacing-1) var(--spacing-1);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: 6px var(--spacing-3);
+  background: none;
+  border: var(--border-width-default) solid var(--border);
+  border-radius: var(--radius-full);
+  color: var(--fg-muted);
+  cursor: pointer;
+  transition:
+    background   var(--animation-hover-duration) var(--animation-hover-curve),
+    border-color var(--animation-hover-duration) var(--animation-hover-curve),
+    color        var(--animation-hover-duration) var(--animation-hover-curve);
+}
+
+.chip:hover {
+  color: var(--fg);
+  background: var(--surface-hover);
+}
+
+.chipActive {
+  background: var(--surface-hover);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.chipActive:hover {
+  color: var(--accent);
+}
+
+.chip:focus-visible {
+  outline: var(--border-width-thick) solid var(--accent);
+  outline-offset: 1px;
 }

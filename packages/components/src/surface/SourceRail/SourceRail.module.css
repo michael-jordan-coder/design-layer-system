@@ -1,0 +1,93 @@
+.rail {
+  display: flex;
+  gap: var(--spacing-2);
+  overflow-x: auto;
+  padding-bottom: var(--spacing-2);
+  scrollbar-width: thin;
+}
+
+.rail::-webkit-scrollbar {
+  height: 6px;
+}
+
+.rail::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: var(--radius-full);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  flex-shrink: 0;
+  width: 220px;
+  padding: var(--spacing-3);
+  background: var(--surface);
+  border: var(--border-width-default) solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--fg);
+  text-decoration: none;
+  transition:
+    background   var(--animation-hover-duration) var(--animation-hover-curve),
+    border-color var(--animation-hover-duration) var(--animation-hover-curve);
+}
+
+.card:hover,
+.cardActive {
+  background: var(--surface-hover);
+  border-color: var(--accent);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.faviconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-hover);
+  color: var(--fg-muted);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.favicon {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.faviconFallback {
+  font-size: 10px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+}
+
+.domain {
+  color: var(--fg-muted);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.number {
+  color: var(--fg-muted);
+  font-weight: 600;
+}
+
+.title {
+  color: var(--fg);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
